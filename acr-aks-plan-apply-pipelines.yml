@@ -1,0 +1,32 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none
+
+pool:
+  name: Default
+  demands:
+   - agent.name -equals NTIENB067
+steps:
+
+- task: TerraformCLI@0
+  displayName: Terraform-Init
+  inputs:
+    command: 'init'
+    allowTelemetryCollection: false
+
+- task: TerraformCLI@0
+  displayName: Terraform-Plan
+  inputs:
+    command: 'plan'
+    environmentServiceName: 'Free Trial(e1eec1a2-22e3-4275-bf5f-5c29e47a03d0)'
+    allowTelemetryCollection: false
+
+- task: TerraformCLI@0
+  displayName: Terraform-Apply
+  inputs:
+    command: 'apply'
+    environmentServiceName: 'Free Trial(e1eec1a2-22e3-4275-bf5f-5c29e47a03d0)'
+    allowTelemetryCollection: false
